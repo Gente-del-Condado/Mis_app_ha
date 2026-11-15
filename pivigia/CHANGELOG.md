@@ -1,5 +1,11 @@
 # Historial de versiones
 
+## 0.1.8 — Documentación y distribución
+
+- Actualizados los enlaces de tiendas y repositorios y la guía de publicación en una dirección.
+- Diferenciados el servidor, la integración y el paquete experimental de YunoHost.
+
+
 ## 0.1.7 — Seguridad y publicación
 
 - Actualizado opentelemetry-api a 1.45.2 para corregir CVE-2026-126360.

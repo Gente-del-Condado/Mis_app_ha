@@ -7,14 +7,14 @@ El complemento ejecuta el receptor SMTP, el detector y el panel. La integración
 Necesitas Home Assistant con Supervisor, arquitectura AMD64 o ARM64 y conexión para descargar dependencias y el modelo inicial.
 
 1. En la tienda de aplicaciones/complementos, abre **Repositorios**.
-2. Añade `https://github.com/Gente-del-Condado/Mis-app`, la tienda pública de Gente del Condado. Supervisor necesita poder clonar el repositorio desde tu instalación.
+2. Añade `https://github.com/Gente-del-Condado/Mis_app_ha`, la tienda pública de Gente del Condado. Supervisor necesita poder clonar el repositorio desde tu instalación.
 3. Busca **PiVigia** e instala. La construcción inicial puede tardar varios minutos.
 4. En **Configuración**, introduce un `admin_token` propio de al menos 16 caracteres. Guarda.
 5. Inicia el complemento, revisa **Registro** y abre **Interfaz web**.
 
-Mis-app recibe automáticamente la carpeta del complemento cuando se actualiza el proyecto. Home Assistant ofrece una actualización cuando aumenta la versión de su manifiesto; la sincronización de la tienda no instala esa actualización por sí sola.
+Mis_app_ha recibe automáticamente la carpeta del complemento cuando se actualiza el proyecto. Home Assistant ofrece una actualización cuando aumenta la versión de su manifiesto; la sincronización de la tienda no instala esa actualización por sí sola.
 
-Si ya instalaste PiVigia desde Forgejo, otro repositorio o una carpeta local, conserva la URL y la instancia existentes. La identidad del complemento incluye el repositorio: añadir Mis-app no migra datos ni convierte aquella instancia en esta. Haz copia y planifica una migración antes de cambiar de origen; no inicies dos instancias con los mismos puertos.
+Si ya instalaste PiVigia desde Forgejo, otro repositorio o una carpeta local, conserva la URL y la instancia existentes. La identidad del complemento incluye el repositorio: añadir Mis_app_ha no migra datos ni convierte aquella instancia en esta. Haz copia y planifica una migración antes de cambiar de origen; no inicies dos instancias con los mismos puertos.
 6. Sigue los primeros pasos de esta página para crear un buzón y enviar una prueba.
 
 Si ya tienes PiVigia instalado, conserva **la URL y la instancia existentes**. Añadir el mismo proyecto con otra URL puede crear otro identificador de repositorio; no traslada automáticamente los datos.

@@ -1,5 +1,10 @@
 # Historial de versiones
 
+## 0.1.7 — Seguridad y publicación
+
+- Actualizado opentelemetry-api a 1.45.2 para corregir CVE-2026-126360.
+- Distribuciones de Home Assistant publicadas directamente desde GitHub después de CI, sin retorno a Forgejo.
+
 ## 0.1.6 — Seguridad del código
 
 - Limitada la complejidad MIME a 128 partes, incluidos contenedores y mensajes anidados. Los correos que exceden el límite quedan fallidos, sin reintentos automáticos ni avisos por ausencia.

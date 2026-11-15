@@ -34,7 +34,7 @@ antes de actualizar. El enlace de información de la ficha abre este manual púb
 
 La integración opcional de entidades se publica por separado en
 [Mis-component](https://github.com/Gente-del-Condado/Mis-component); sigue
-[su guía](https://gente-del-condado.github.io/headscale-gateway-ha/INTEGRACION_HA.html)
+[su guía](https://gente-del-condado.github.io/headscale_gateway_ynh/INTEGRACION_HA.html)
 cuando el Gateway ya esté funcionando.
 
 ## Abrir el panel desde Home Assistant

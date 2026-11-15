@@ -16,4 +16,4 @@ El instalador se detiene cuando termina. No es el reproductor: el audio se ejecu
 
 Requiere Home Assistant OS en aarch64/amd64 y una salida PulseAudio accesible desde Home Assistant. Los sonidos se gestionan en Multimedia y las reglas en la configuración de la integración.
 
-[Instalación y actualización](DOCS.md) · [Guía completa de JackSignal](https://github.com/Gente-del-Condado/jacksignal-ha) · [Cambios](CHANGELOG.md)
+[Instalación y actualización](DOCS.md) · [Guía completa de JackSignal](https://github.com/Gente-del-Condado/jacksignal_ha) · [Cambios](CHANGELOG.md)

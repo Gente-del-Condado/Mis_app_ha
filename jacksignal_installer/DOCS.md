@@ -2,7 +2,7 @@
 
 ## Primera instalación
 
-1. Instala esta aplicación desde [Mis-app](https://github.com/Gente-del-Condado/Mis-app).
+1. Instala esta aplicación desde [Mis_app_ha](https://github.com/Gente-del-Condado/Mis_app_ha).
 2. Pulsa **Iniciar** y espera a que el registro confirme la instalación.
 3. La aplicación se detiene automáticamente. Reinicia Home Assistant.
 4. Abre **Ajustes → Dispositivos y servicios → Añadir integración → JackSignal**.
@@ -24,13 +24,13 @@ Si la integración no aparece tras reiniciar, comprueba el registro del instalad
 
 ## Alternativa: Marketplace
 
-El repositorio [jacksignal-ha](https://github.com/Gente-del-Condado/jacksignal-ha) instala la integración directamente. En una primera instalación con Home Assistant 2026.11 o posterior puede configurarla sin reiniciar si no se había cargado antes. En actualizaciones, sigue el aviso de Home Assistant. Esto no cambia los pasos de esta aplicación instaladora. Usa una sola vía para gestionar las actualizaciones.
+El repositorio [jacksignal_ha](https://github.com/Gente-del-Condado/jacksignal_ha) instala la integración directamente. En una primera instalación con Home Assistant 2026.11 o posterior puede configurarla sin reiniciar si no se había cargado antes. En actualizaciones, sigue el aviso de Home Assistant. Esto no cambia los pasos de esta aplicación instaladora. Usa una sola vía para gestionar las actualizaciones.
 
 ## Configurar sonidos y voz
 
 Las reglas se configuran en **JackSignal → Configurar**, dentro de Dispositivos y servicios, no en la aplicación instaladora. Allí puedes vincular Alarmo, asignar sonidos de apertura/cierre, configurar voz de sensores, consultar las asignaciones y activar DLNA de audio.
 
-[Guía completa: sonidos, voz, prioridades, automatizaciones y DLNA](https://github.com/Gente-del-Condado/jacksignal-ha).
+[Guía completa: sonidos, voz, prioridades, automatizaciones y DLNA](https://github.com/Gente-del-Condado/jacksignal_ha).
 
 
 ## Envío directo y diagnóstico (0.8.0)

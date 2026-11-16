@@ -31,8 +31,6 @@ La primera instalación construye la app y requiere conexión a Internet.
 
 [Guía de uso](private_git_manager/DOCS.md) · [Historial de versiones](private_git_manager/CHANGELOG.md)
 
-[Guía de PiVigia](pivigia/DOCS.md) · [Cambios de PiVigia](pivigia/CHANGELOG.md)
-
 La integración opcional de sensores de PiVigia para
 Home Assistant se instala por separado. Si ya utilizas PiVigia desde otro
 repositorio o una carpeta local, añadir esta tienda no migra sus datos ni sustituye

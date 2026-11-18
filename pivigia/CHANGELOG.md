@@ -1,5 +1,11 @@
 # Historial de versiones
 
+## 0.1.9 — AppArmor en Home Assistant
+
+- Perfil propio para Python/OpenCV, correo, RTSP, modelos, avisos e Ingress.
+- Mantiene datos, opciones, certificados STARTTLS y permisos del complemento.
+- Deniega escribir sobre programas y ejecutar un shell; resultados del laboratorio en `docs/APPARMOR.md`.
+
 ## 0.1.8 — Documentación y distribución
 
 - Actualizados los enlaces de tiendas y repositorios y la guía de publicación en una dirección.

@@ -17,3 +17,9 @@ El instalador se detiene cuando termina. No es el reproductor: el audio se ejecu
 Requiere Home Assistant OS en aarch64/amd64 y una salida PulseAudio accesible desde Home Assistant. Los sonidos se gestionan en Multimedia y las reglas en la configuración de la integración.
 
 [Instalación y actualización](DOCS.md) · [Guía completa de JackSignal](https://github.com/Gente-del-Condado/jacksignal_ha) · [Cambios](CHANGELOG.md)
+
+## AppArmor del instalador
+
+La versión 0.19.2 incorpora un perfil propio en modo enforce. Solo lee la integración incluida y escribe su carpeta, la preparación temporal y la versión anterior. No modifica `.storage`, secretos u otras integraciones, ni necesita acceso de red. Audio, PulseAudio, voz, Alarmo y DLNA se ejecutan en Core: este perfil no cambia sus permisos. Conserva el modo de arranque manual del instalador.
+
+[Alcance y pruebas del perfil AppArmor](APPARMOR.md).

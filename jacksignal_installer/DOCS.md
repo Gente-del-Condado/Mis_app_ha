@@ -60,3 +60,7 @@ JackSignal prefiere español cuando el motor lo admite, empezando por español d
 Abre **JackSignal → Voz → Configurar voz general**. Selecciona Piper, idioma automático (prefiere español) y velocidad. Marca **Aplicar estos valores a todos los avisos de voz existentes** si quieres que todos los hereden. Para una excepción, edita el aviso y desmarca **Usar motor, idioma, voz y velocidad generales**.
 
 Si Piper falta, **Preparar Piper** muestra un aviso y solicita confirmación. Con Supervisor puede instalar la aplicación oficial, configurar una voz española e iniciarla. Si ya existe, conserva su configuración. Después añade Wyoming desde Dispositivos y servicios y pulsa Actualizar. Mantén la pantalla abierta durante la preparación; si falla, revisa la aplicación antes de reintentar. La instalación real sigue pendiente de validar en Home Assistant OS.
+
+## AppArmor del instalador
+
+La versión 0.19.2 incorpora un perfil propio en modo enforce. Solo lee la integración incluida y escribe su carpeta, la preparación temporal y la versión anterior. No modifica `.storage`, secretos u otras integraciones, ni necesita acceso de red. Audio, PulseAudio, voz, Alarmo y DLNA se ejecutan en Core: este perfil no cambia sus permisos. Conserva el modo de arranque manual del instalador.

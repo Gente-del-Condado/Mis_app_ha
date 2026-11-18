@@ -13,3 +13,4 @@ init: true
 map:
   - type: homeassistant_config
     read_only: false
+image: ghcr.io/gente-del-condado/ha-jacksignal-installer

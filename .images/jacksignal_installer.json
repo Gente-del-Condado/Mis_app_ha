@@ -1,0 +1,9 @@
+{
+  "app": "jacksignal_installer",
+  "version": "0.19.1",
+  "tree": "b4815c70129a6637eac4f5330b558d65fdbb8533",
+  "sha": "1025c4b51e9caa473f4e07e496ca44a4e69f1182",
+  "image": "ghcr.io/gente-del-condado/ha-jacksignal-installer",
+  "digest": "sha256:c074327faa298f12ed0cd6aa3f59850df650dab641274b660022b5f7af675874",
+  "origin": "https://gentedelcondado.es/forgejo/wolfbelmi88/jacksignal"
+}

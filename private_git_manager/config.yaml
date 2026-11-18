@@ -29,3 +29,4 @@ map:
     path: /homeassistant
 options: {}
 schema: {}
+image: ghcr.io/gente-del-condado/ha-private-git-manager

@@ -1,0 +1,9 @@
+{
+  "app": "headscale_gateway",
+  "version": "1.4.17",
+  "tree": "0b4ea3a6dbb9f91d8f947b3c04aea0f31ba9f77d",
+  "sha": "1025c4b51e9caa473f4e07e496ca44a4e69f1182",
+  "image": "ghcr.io/gente-del-condado/ha-headscale-gateway",
+  "digest": "sha256:dad0fc7dd64d5ff0891bad53e435c7e56c9413b5897cf2bf1f2abe2c30f2fdc4",
+  "origin": "https://gentedelcondado.es/forgejo/wolfbelmi88/headscale_gateway"
+}

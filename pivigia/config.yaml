@@ -39,3 +39,4 @@ schema:
   allow_plain_auth: bool
   tls_cert: "str?"
   tls_key: "str?"
+image: ghcr.io/gente-del-condado/ha-pivigia

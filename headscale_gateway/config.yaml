@@ -32,3 +32,4 @@ schema:
   node_name: match(^([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)?$)
   lan_port: port
   log_level: list(info|debug|trace|warn|error)?
+image: ghcr.io/gente-del-condado/ha-headscale-gateway

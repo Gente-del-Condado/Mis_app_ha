@@ -1,0 +1,9 @@
+{
+  "app": "private_git_manager",
+  "version": "0.17.1",
+  "tree": "4a80212627029aa8e48b13ab91d061779cd86248",
+  "sha": "1025c4b51e9caa473f4e07e496ca44a4e69f1182",
+  "image": "ghcr.io/gente-del-condado/ha-private-git-manager",
+  "digest": "sha256:7b0b9081f1dcaaaeb03127c02c21a575726d3b79132caf076f0a4e8e5db1b3e7",
+  "origin": "https://gentedelcondado.es/forgejo/wolfbelmi88/HA-Private-Git-Manager"
+}

@@ -1,9 +1,9 @@
 {
   "app": "private_git_manager",
-  "version": "0.17.2",
-  "tree": "e7a7c4ca47a3099ad2174594c2042014a77b2371",
-  "sha": "73ee0e37894399f98216875787bbb41471fd65fc",
+  "version": "0.17.3",
+  "tree": "065a369176478eea6ed01d8d36c3895c8e0ae830",
+  "sha": "ab093eda00840ab5629d0de0766e7a3dab7a44a1",
   "image": "ghcr.io/gente-del-condado/ha-private-git-manager",
-  "digest": "sha256:01339ca1567dbcfd7bfc7503e285379f703666379515acd492639d0d07dd44de",
+  "digest": "sha256:19313bd09b6f4bd278af3bf9b04a2fd53c3caf5dff64338ecf38f53b53388704",
   "origin": "https://gentedelcondado.es/forgejo/wolfbelmi88/HA-Private-Git-Manager"
 }

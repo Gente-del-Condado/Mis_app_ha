@@ -22,3 +22,10 @@ El principal privado se mantiene primero en
 este complemento a Mis_app_ha. No se publica de vuelta a Forgejo. La integración
 se instala por separado desde
 [pivigia_ha](https://github.com/Gente-del-Condado/pivigia_ha).
+
+## AppArmor
+
+Desde 0.1.9 se incluye un [perfil propio](APPARMOR.md), validado en amd64 y
+aarch64. Mantiene SMTP/STARTTLS, RTSP, inferencia y descarga de modelos, panel
+y avisos. El proceso puede guardar sus datos en `/data`, pero no ejecutar un
+shell ni modificar el programa. Conserva la protección de Home Assistant activada.

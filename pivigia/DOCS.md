@@ -4,11 +4,11 @@ El complemento ejecuta el receptor SMTP, el detector y el panel. La integración
 
 ## Instalar el complemento
 
-Necesitas Home Assistant con Supervisor, arquitectura AMD64 o ARM64 y conexión para descargar dependencias y el modelo inicial.
+Necesitas Home Assistant con Supervisor, arquitectura AMD64 o ARM64 y conexión para descargar la imagen precompilada de GHCR.
 
 1. En la tienda de aplicaciones/complementos, abre **Repositorios**.
 2. Añade `https://github.com/Gente-del-Condado/Mis_app_ha`, la tienda pública de Gente del Condado. Supervisor necesita poder clonar el repositorio desde tu instalación.
-3. Busca **PiVigia** e instala. La construcción inicial puede tardar varios minutos.
+3. Busca **PiVigia** e instala. Supervisor descarga la imagen ya compilada; no construye PiVigia en tu equipo.
 4. En **Configuración**, introduce un `admin_token` propio de al menos 16 caracteres. Guarda.
 5. Inicia el complemento, revisa **Registro** y abre **Interfaz web**.
 
@@ -148,3 +148,7 @@ Para instalar desde una carpeta local de desarrollo, conserva su identidad y sus
 - **No aparece una actualización:** revisa el repositorio de la instancia y el registro de Supervisor.
 
 Consulta [Copias](https://gentedelcondado.es/forgejo/wolfbelmi88/pivigia/src/branch/main/docs/COPIAS.md) y [Solución de problemas](https://gentedelcondado.es/forgejo/wolfbelmi88/pivigia/src/branch/main/docs/PROBLEMAS.md). Las pruebas del proyecto incluyen contratos del complemento, pero no sustituyen la comprobación en tu instalación real de Supervisor.
+
+## AppArmor
+
+Desde 0.1.9 se incluye un [perfil propio](APPARMOR.md) en modo enforce. Conserva SMTP/STARTTLS, RTSP, modelos, avisos e Ingress; no requiere desactivar la protección. Solo escribe en los datos y temporales del servicio. Los certificados opcionales de `/ssl` siguen siendo de solo lectura.

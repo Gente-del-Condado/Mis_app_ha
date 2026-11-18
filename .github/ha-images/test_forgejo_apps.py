@@ -55,6 +55,10 @@ class ForgejoAppsTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     apps.inventory(folder)
                 file.unlink()
+            alias = folder.parent / 'alias'
+            alias.symlink_to(folder, target_is_directory=True)
+            with self.assertRaises(ValueError):
+                apps.inventory(alias)
             (folder / 'link').symlink_to(folder / 'README.md')
             with self.assertRaises(ValueError):
                 apps.inventory(folder)

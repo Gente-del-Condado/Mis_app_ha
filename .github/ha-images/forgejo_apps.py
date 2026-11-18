@@ -113,6 +113,8 @@ def download(repo, destination):
 
 def inventory(folder):
     folder = Path(folder)
+    if folder.is_symlink() or not folder.is_dir():
+        raise ValueError('El contexto debe ser una carpeta real')
     files = {}
     for file in sorted(folder.rglob('*')):
         if file.is_symlink():

@@ -2,6 +2,9 @@ name: Construir y publicar aplicaciones precompiladas
 'on':
   push:
     branches: [build-source]
+  workflow_run:
+    workflows: [Verificar aplicaciones desde Forgejo]
+    types: [completed]
   workflow_dispatch:
 permissions:
   contents: read
@@ -10,6 +13,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   plan:
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == github.repository)
     runs-on: ubuntu-24.04
     outputs:
       matrix: ${{ steps.plan.outputs.matrix }}

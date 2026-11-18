@@ -1,5 +1,11 @@
 # Historial de versiones
 
+## 0.2.0 — Mantenimiento y comprobación de distribución
+
+- Nueva entrega para comprobar el recorrido automático desde Forgejo hasta las imágenes GHCR y las distribuciones de Home Assistant.
+- Ampliada la guía del complemento para distinguir la versión publicada, la instalada y la integración de sensores.
+- Se conservan el comportamiento de 0.1.9, el perfil AppArmor, los datos y las opciones existentes.
+
 ## 0.1.9 — AppArmor en Home Assistant
 
 - Perfil propio para Python/OpenCV, correo, RTSP, modelos, avisos e Ingress.

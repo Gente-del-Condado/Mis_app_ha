@@ -134,6 +134,19 @@ La URL debe apuntar a la API directa, no a una ruta temporal de Ingress. HACS re
 4. Revisa el registro, abre el panel y comprueba versión, buzones, modelo y una imagen de prueba.
 5. Actualiza la integración de sensores por separado si la nueva versión lo requiere.
 
+### Comprobar la llegada de una versión
+
+Una versión publicada en Forgejo pasa primero por la comprobación automática de
+fuentes, la construcción de imágenes AMD64/ARM64 y la verificación de su descarga.
+Solo entonces aparece en la rama `main` de Mis_app_ha. La consulta de cambios es
+horaria; el push al origen no implica que la tienda ya ofrezca esa versión.
+
+En Home Assistant, busca actualizaciones del repositorio y compara la versión
+disponible con la instalada. Después de actualizar y reiniciar el complemento,
+comprueba la versión que muestra el panel de PiVigia. La integración de sensores
+se distribuye aparte: actualizarla no actualiza el servidor ni sustituye el
+complemento. Consulta [Publicación](https://gentedelcondado.es/forgejo/wolfbelmi88/pivigia/src/branch/main/docs/PUBLICACION.md) para seguir cada destino.
+
 Los datos del complemento están en `/data`, incluidos SQLite, token y modelos opcionales en `/data/models`. El código público y las capturas del manual no incluyen esos datos.
 
 Para instalar desde una carpeta local de desarrollo, conserva su identidad y sustituye las fuentes del mismo complemento antes de reconstruirlo. Un cambio de repositorio o de identificador requiere una migración planificada con copia y restauración.

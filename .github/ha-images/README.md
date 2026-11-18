@@ -54,12 +54,14 @@ JackSignal (auditoría, integración/panel y pruebas de publicación). Ninguna p
 recibe el token. Solo el contexto publicable con sus sumas y modos se transfiere
 al trabajo de preparación; nunca el árbol privado completo.
 
-Antes de escribir `build-source` se vuelve a comprobar el SHA de Forgejo. Un plan inicial consulta los recibos `.sources/` antes de descargar los
-proyectos. Si no hay cambios, no inicia calidad ni publicación. Las imágenes
+Antes de escribir `build-source` se vuelve a comprobar el SHA de Forgejo. Un plan
+inicial consulta los recibos `.sources/` antes de descargar los proyectos. Si no hay cambios, no inicia calidad ni publicación. Las imágenes
 pendientes se comprueban por separado para recuperar un intento fallido. El
 workflow reutilizable de imágenes se llama solo si hace falta, incluso cuando
 el commit lo escribe GITHUB_TOKEN. Un fallo impide preparar/publicar; no se ignoran las comprobaciones
-ni se devuelven estados a Forgejo. Las integraciones también se publican en `pivigia_ha`, `jacksignal_ha` y sus
+ni se devuelven estados a Forgejo.
+
+Las integraciones también se publican en `pivigia_ha`, `jacksignal_ha` y sus
 carpetas de `Mis_componente_ha`, conservando las demás integraciones. Para ello
 `DISTRIBUTION_TOKEN` requiere Contents de escritura solo en esos tres destinos.
 Los exportadores se ejecutan sin credenciales durante calidad; el trabajo con

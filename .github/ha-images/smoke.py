@@ -2,8 +2,8 @@
 """Pruebas nativas en contenedores desechables; no utiliza una instalación real."""
 import argparse
 import json
+import os
 from pathlib import Path
-import shutil
 import subprocess
 import tempfile
 import uuid
@@ -106,6 +106,11 @@ print('PGM_OK: rechazo de acceso y suplantación fuera de Ingress')'''
             subprocess.run(['docker', 'logs', '--tail', '50', server], check=False)
             subprocess.run(['docker', 'rm', '-f', server], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             subprocess.run(['docker', 'network', 'rm', network], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            # El contenedor crea archivos como root. Devolver solo el directorio
+            # temporal del ensayo al runner permite retirarlo sin omitir errores.
+            run('docker', 'run', '--rm', '--network', 'none', '--user', '0',
+                '--entrypoint', 'chown', '-v', str(root) + ':/lab', image,
+                '-R', str(os.getuid()) + ':' + str(os.getgid()), '/lab')
 
 
 if __name__ == '__main__':

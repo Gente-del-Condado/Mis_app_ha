@@ -22,8 +22,8 @@ publicado exige incrementar su versión; no se reemplazan etiquetas estables.
 La publicación conserva otras aplicaciones y reintenta conflictos sin forzar Git.
 
 El GITHUB_TOKEN efímero de la tienda tiene `packages: write` en compilación y
-además `contents: write` al actualizar main. No requiere tokens personales nuevos,
-claves Android, ni acceso de escritura a Forgejo. GHCR puede crear paquetes privados
+además `contents: write` al actualizar main. La construcción de imágenes no requiere credenciales personales,
+claves Android ni acceso de escritura a Forgejo. GHCR puede crear paquetes privados
 la primera vez: comprobar su visibilidad pública antes de distribuirlos. El flujo
 espera un máximo acotado y mantiene la tienda anterior si no puede descargarlos
 anónimamente; nunca incorpora credenciales de registro a los manifiestos.
@@ -54,11 +54,20 @@ JackSignal (auditoría, integración/panel y pruebas de publicación). Ninguna p
 recibe el token. Solo el contexto publicable con sus sumas y modos se transfiere
 al trabajo de preparación; nunca el árbol privado completo.
 
-Antes de escribir `build-source` se vuelve a comprobar el SHA de Forgejo. Los
-recibos `.sources/` evitan repetir fuentes ya validados. `workflow_run` enlaza la
-validación correcta con las imágenes, incluso cuando el commit lo escribe
-GITHUB_TOKEN. Un fallo impide preparar/publicar; no se ignoran las comprobaciones
-ni se devuelven estados a Forgejo. No publica los catálogos de componentes.
+Antes de escribir `build-source` se vuelve a comprobar el SHA de Forgejo. Un plan inicial consulta los recibos `.sources/` antes de descargar los
+proyectos. Si no hay cambios, no inicia calidad ni publicación. Las imágenes
+pendientes se comprueban por separado para recuperar un intento fallido. El
+workflow reutilizable de imágenes se llama solo si hace falta, incluso cuando
+el commit lo escribe GITHUB_TOKEN. Un fallo impide preparar/publicar; no se ignoran las comprobaciones
+ni se devuelven estados a Forgejo. Las integraciones también se publican en `pivigia_ha`, `jacksignal_ha` y sus
+carpetas de `Mis_componente_ha`, conservando las demás integraciones. Para ello
+`DISTRIBUTION_TOKEN` requiere Contents de escritura solo en esos tres destinos.
+Los exportadores se ejecutan sin credenciales durante calidad; el trabajo con
+credenciales únicamente valida sumas/modos y copia sus resultados. `.publication/`
+registra SHA y versión. Los tags JackSignal existentes se verifican y no se mueven.
+El recibo de fuentes se actualiza después de completar las distribuciones; un
+fallo permite reintentarlas sin marcar la entrega como terminada. El formato 2
+obliga a comprobar una vez las fuentes de la migración anterior.
 
 `store-readme.md` se exporta al README raíz de la tienda; sus aplicaciones solo
 se editan en sus fuentes. No se publican tokens en YAML ni se cambian presupuestos.

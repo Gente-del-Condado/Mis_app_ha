@@ -92,11 +92,13 @@ def git(root, *args):
     return subprocess.check_output(['git', '-C', str(root), *args], text=True).strip()
 
 
-def download(repo, destination):
+def download(repo, destination, expected_sha=None):
     sha = current(repo)
+    if expected_sha and sha != expected_sha:
+        raise ValueError('El main ha cambiado después de planificar')
     previous = subprocess.run(['git', 'show', 'origin/build-source:.sources/' + repo + '.json'],
                               capture_output=True, text=True)
-    changed = previous.returncode != 0 or json.loads(previous.stdout)['sha'] != sha
+    changed = previous.returncode != 0 or json.loads(previous.stdout).get('sha') != sha or json.loads(previous.stdout).get('distribution_format') != 2
     with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
         output.write('changed=' + str(changed).lower() + '\n')
     if not changed:
@@ -111,7 +113,7 @@ def download(repo, destination):
     print('FUENTES_FIJADOS:', repo, sha)
 
 
-def inventory(folder):
+def inventory(folder, application=True):
     folder = Path(folder)
     if folder.is_symlink() or not folder.is_dir():
         raise ValueError('El contexto debe ser una carpeta real')
@@ -128,9 +130,9 @@ def inventory(folder):
         if re.search(rb'-----BEGIN (?:OPENSSH |RSA |EC |DSA )?PRIVATE KEY-----|gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{50,}', data):
             raise ValueError('No se publica material de clave privada')
         files[relative] = hashlib.sha256(data).hexdigest()
-    if not {'config.yaml', 'Dockerfile', 'README.md', 'icon.png', 'logo.png'} <= files.keys():
+    if application and not {'config.yaml', 'Dockerfile', 'README.md', 'icon.png', 'logo.png'} <= files.keys():
         raise ValueError('Faltan fuentes, licencia o recursos del paquete')
-    if folder.name == 'pivigia' and 'LICENSE' not in files:
+    if application and folder.name == 'pivigia' and 'LICENSE' not in files:
         raise ValueError('Falta la licencia de PiVigia')
     return files
 
@@ -159,6 +161,12 @@ def prepare(repo, source, output):
     record['files'] = inventory(output / APPS[repo])
     record['modes'] = {name: 0o755 if (output / APPS[repo] / name).stat().st_mode & 0o111 else 0o644
                        for name in record['files']}
+    from distributions import prepare as prepare_distributions
+    prepare_distributions(repo, source, output)
+    payload = output / 'distributions'
+    record['distributions'] = inventory(payload, application=False)
+    record['distribution_modes'] = {name: 0o755 if (payload / name).stat().st_mode & 0o111 else 0o644
+                                    for name in record['distributions']}
     (output / 'receipt.json').write_text(json.dumps(record, indent=2) + '\n')
 
 
@@ -174,6 +182,13 @@ def validate(folder, repo):
     if (record['modes'].keys() != record['files'].keys()
             or any(mode not in (0o644, 0o755) for mode in record['modes'].values())):
         raise ValueError('Permisos de transferencia no válidos')
+    if 'distributions' in record:
+        if (inventory(folder / 'distributions', application=False) != record['distributions']
+                or record['distribution_modes'].keys() != record['distributions'].keys()
+                or any(mode not in (0o644, 0o755) for mode in record['distribution_modes'].values())):
+            raise ValueError('Distribuciones alteradas durante la transferencia')
+        for name, mode in record['distribution_modes'].items():
+            (folder / 'distributions' / name).chmod(mode)
     return record
 
 
@@ -208,29 +223,65 @@ def stage(artifacts):
                 (target / name).chmod(mode)
             receipt = Path('.sources') / (repo + '.json')
             receipt.parent.mkdir(exist_ok=True)
-            receipt.write_text(json.dumps({'repo': repo, 'sha': record['sha']}, indent=2) + '\n')
+            receipt.write_text(json.dumps({'repo': repo, 'sha': record['sha'], 'distribution_format': 2}, indent=2) + '\n')
             git('.', 'add', '--', app, str(receipt))
         if subprocess.run(['git', 'diff', '--cached', '--quiet']).returncode == 0:
+            output('images_changed', pending_images())
             return
         git('.', '-c', 'user.name=github-actions[bot]',
             '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com',
             'commit', '-m', 'Preparar aplicaciones verificadas desde Forgejo sin Actions privados')
         if subprocess.run(['git', 'push', 'origin', 'HEAD:build-source']).returncode == 0:
+            git('.', 'fetch', 'origin', '+refs/heads/build-source:refs/remotes/origin/build-source')
+            output('images_changed', pending_images())
             return
     raise ValueError('No se pudo actualizar build-source sin forzar Git')
 
 
+
+def output(name, value):
+    with open(os.environ['GITHUB_OUTPUT'], 'a') as stream:
+        stream.write(name + '=' + (str(value).lower() if isinstance(value, bool) else value) + '\n')
+
+
+def pending_images():
+    for app in ('headscale_gateway', 'jacksignal_installer', 'pivigia', 'private_git_manager'):
+        tree = git('.', 'rev-parse', 'origin/build-source:' + app)
+        record = subprocess.run(['git', 'show', 'origin/main:.images/' + app + '.json'], capture_output=True, text=True)
+        if record.returncode or json.loads(record.stdout)['tree'] != tree:
+            return True
+    return False
+
+
+def plan():
+    git('.', 'fetch', '--no-tags', 'origin', '+refs/heads/main:refs/remotes/origin/main',
+        '+refs/heads/build-source:refs/remotes/origin/build-source')
+    choices = []
+    for repo in APPS:
+        sha = current(repo)
+        previous = subprocess.run(['git', 'show', 'origin/build-source:.sources/' + repo + '.json'], capture_output=True, text=True)
+        record = json.loads(previous.stdout) if previous.returncode == 0 else {}
+        if record.get('sha') != sha or record.get('distribution_format') != 2:
+            choices.append({'repo': repo, 'sha': sha, 'python': '3.12' if repo == 'pivigia' else '3.14'})
+    output('matrix', json.dumps({'include': choices}, separators=(',', ':')))
+    output('changed', bool(choices))
+    output('images_pending', pending_images())
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=['download', 'prepare', 'check', 'stage'])
+    parser.add_argument('action', choices=['plan', 'download', 'prepare', 'check', 'stage'])
     parser.add_argument('--repo', choices=APPS)
+    parser.add_argument('--sha')
     parser.add_argument('--source', default='source')
     parser.add_argument('--output', default='prepared')
     parser.add_argument('--artifacts', default='prepared')
     args = parser.parse_args()
     try:
-        if args.action == 'download':
-            download(args.repo, args.source)
+        if args.action == 'plan':
+            plan()
+        elif args.action == 'download':
+            download(args.repo, args.source, args.sha)
         elif args.action == 'prepare':
             prepare(args.repo, args.source, args.output)
         elif args.action == 'check':

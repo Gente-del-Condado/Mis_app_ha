@@ -86,3 +86,9 @@ verificación pública falla, permanece disponible la versión anterior de main.
 Las etiquetas ya distribuidas no se reemplazan: los cambios requieren una versión
 nueva. Se conservan slugs, opciones, volúmenes y permisos; la primera migración a
 imágenes no fuerza actualizaciones ni reinstalaciones en equipos existentes.
+
+El recorrido público de PiVigia y JackSignal entrega también las integraciones
+a sus repositorios dedicados y a Mis_componente_ha. El plan evita descargar y
+comprobar de nuevo un SHA ya publicado. Un fallo de imágenes queda pendiente
+para reintento; un fallo de distribución no se marca como una entrega completa.
+Las credenciales de publicación no se entregan a las pruebas ni a los exportadores.

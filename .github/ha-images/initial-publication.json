@@ -1,0 +1,10 @@
+{
+  "format": 1,
+  "apps": [
+    "headscale_gateway",
+    "jacksignal_installer",
+    "pivigia",
+    "private_git_manager"
+  ],
+  "purpose": "Primera publicación nativa de las versiones existentes; no reinstala aplicaciones."
+}

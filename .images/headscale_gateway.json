@@ -1,9 +1,9 @@
 {
   "app": "headscale_gateway",
-  "version": "1.4.19",
-  "tree": "31d3ba27dfa5541cd9a011390e811f7311f6c66a",
-  "sha": "23227f2fd9b64c4dd3e2efdc47af2efac45350d3",
+  "version": "1.4.20",
+  "tree": "5ccc55ed969b22a1efd6d3f5c79ca2397756af84",
+  "sha": "ff6703ed6f99bef87d0bc09f9305f5b13cef8af2",
   "image": "ghcr.io/gente-del-condado/ha-headscale-gateway",
-  "digest": "sha256:382fd376af11cdebf8f54e50198484c62d8cb64b1b9c77bfbc4bae6505c3bcf9",
+  "digest": "sha256:41abbd3bbd6150fb02e328e07db35d3acded03d01bcfb23bfa5609139a6682de",
   "origin": "https://gentedelcondado.es/forgejo/wolfbelmi88/headscale_gateway"
 }

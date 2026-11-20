@@ -1,9 +1,9 @@
 {
   "app": "pivigia",
-  "version": "0.3.0",
-  "tree": "ecb33613aaa27cd06267eaa439bb97f250580cbe",
-  "sha": "7ad3d36479952c28eaa6c739560fd907aebeb283",
+  "version": "0.3.1",
+  "tree": "e074515943768bc6e8ee34796bcbf2574d62c100",
+  "sha": "723e4f0efdcbac15f74bf816f2fbdffcc78b6641",
   "image": "ghcr.io/gente-del-condado/ha-pivigia",
-  "digest": "sha256:0e26cdb4e4776e3d5b970f223a830fabaa17b86acf3df62552ddb13c5812b1f0",
+  "digest": "sha256:4c43299e4ae4050fdce6cb29cc346436c23fb9aa79c8b1bbe68974903c259a45",
   "origin": "https://gentedelcondado.es/forgejo/wolfbelmi88/pivigia"
 }
